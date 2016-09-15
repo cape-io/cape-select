@@ -1,6 +1,6 @@
 # cape-select v1.0.0
 
-A few reselect/redux inspired helper utility/selector functions.
+A few `reselect` inspired helper utility/selector functions.
 
 Please view source for explaination and tests for usage.
 
