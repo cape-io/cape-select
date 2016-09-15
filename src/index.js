@@ -1,9 +1,8 @@
 import {
-  cond, defaultTo, find, flow, get, identical, isEmpty, isObject,
-  negate, nthArg, over, property, spread, stubTrue,
+  cond, defaultTo, find, flow, flowRight, get, identical, isEmpty, isObject,
+  negate, nthArg, over, partial, property, spread, stubTrue,
 } from 'lodash'
 import fpDefaultTo from 'lodash/fp/defaultTo'
-import fpPartialRight from 'lodash/fp/partialRight'
 
 // Returns true if sent a value that is exactly false.
 export const isFalse = identical(false)
@@ -41,5 +40,5 @@ export function simpleSelector(...funcs) {
   return flow(over(funcs), spread(last))
 }
 
-// Select something and turn it into boolean.
-export const boolSelector = fpPartialRight(fpPartialRight, toBool)
+// Select something and turn it into boolean. boolSelector(selector)(state)
+export const boolSelector = partial(flowRight, toBool)

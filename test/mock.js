@@ -1,20 +1,16 @@
 import immutable from 'seamless-immutable'
 
-export const state = {
-  socket: immutable({
-    connected: false,
-    connect: true,
-    endTime: null,
-    presenter: null,
-    sessionId: null,
-    siteId: null,
-    socketId: null,
-    startTime: null,
-    subscriber: {},
-  }),
+export const socket = {
+  connected: false,
+  connect: true,
+  endTime: null,
+  presenter: null,
+  sessionId: null,
+  siteId: null,
+  socketId: null,
+  startTime: null,
+  subscriber: {},
 }
-export const change = { presenter: 'kai', sessionId: 'abc123' }
-export const state2 = { socket: defaultState.merge(change) }
 
 export const user = {
   type: 'Person',
@@ -27,9 +23,7 @@ export const user2 = {
   id: 'auth',
   name: 'Auth User',
 }
-export const state = immutable({
-  user,
-})
+
 export const props = {
   item: { id: 'bar' },
   title: 'strawberry',
@@ -60,3 +54,10 @@ export const collection = {
     },
   },
 }
+export const state = immutable({
+  collection,
+  user,
+  socket,
+})
+export const change = { presenter: 'kai', sessionId: 'abc123' }
+export const state2 = state.set('socket', state.socket.merge(change))
