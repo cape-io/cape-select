@@ -35,6 +35,18 @@ test('toBool', (t) => {
   t.true(toBool(1), 'num')
   t.end()
 })
+
+const getSocket = property('socket')
+const getSessionId = select(getSocket, 'sessionId')
+const getPresenter = select(getSocket, 'presenter')
+
+test('boolSelector', (t) => {
+  const bSel = boolSelector(getSessionId)
+  t.equal(bSel(state), false, 'null')
+  t.equal(bSel(state2), true, 'string')
+  t.end()
+})
+
 test('getDefault', (t) => {
   t.equal(getDefault('item.id', 'title')(props), 'bar', 'item.id')
   t.equal(getDefault('item.nothing', 'title')(props), 'strawberry', 'title')
@@ -61,9 +73,7 @@ test('select()', (t) => {
   t.equal(getGender(stateNoGen), 'uni', 'getGender missing, use default.')
   t.end()
 })
-const getSocket = property('socket')
-const getSessionId = select(getSocket, 'sessionId')
-const getPresenter = select(getSocket, 'presenter')
+
 test('simpleSelector', (t) => {
   function checkAnswer(arg1, arg2, arg3) {
     t.equal(arg1, change.sessionId, 'arg1')
@@ -71,11 +81,4 @@ test('simpleSelector', (t) => {
     t.end(arg3)
   }
   simpleSelector(getSessionId, getPresenter, checkAnswer)(state2)
-})
-
-test('boolSelector', (t) => {
-  const bSel = boolSelector(getSessionId)
-  t.equal(bSel(state), false, 'null')
-  t.equal(bSel(state2), true, 'string')
-  t.end()
 })
