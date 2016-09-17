@@ -2,10 +2,15 @@ import test from 'tape'
 import { constant, isFunction, property } from 'lodash'
 
 import {
-  boolSelector, isFalse, toBool, getDefault, getProps, getSelect,
+  boolSelector, createObj, isFalse, toBool, getDefault, getProps, getSelect,
   select, simpleSelector, firstValArg,
 } from '../src'
 import { change, collection, state, props, state2 } from './mock'
+
+test('createObj', (t) => {
+  t.deepEqual(createObj('foo', 'bar'), { foo: 'bar' })
+  t.end()
+})
 
 test('isFalse', (t) => {
   t.ok(isFunction(isFalse), 'isFunc')

@@ -5,6 +5,7 @@ A few `reselect` inspired helper utility/selector functions. Using functional pr
 Please view source for explanation and tests for usage.
 
 - `isFalse(false)` - Returns true if sent a value that is exactly false.
+- `isTrue(true)` - Returns true if sent a value that is exactly true.
 - `firstValArg(0, '', 'foo')` - Find the first truthy argument value.
 - `toBool({})` - Turn empty objects and arrays to false. Turn other values into a boolean.
 - `getDefault('path.one', 'second.path')` - Given two paths, select the first one that is defined.

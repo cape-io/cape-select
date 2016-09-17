@@ -1,12 +1,14 @@
 import {
-  cond, defaultTo, find, flow, flowRight, get, identical, isEmpty, isObject,
+  cond, curry, defaultTo, find, flow, flowRight, get, identical, isEmpty, isObject,
   negate, nthArg, over, partial, property, spread, stubTrue,
 } from 'lodash'
 import fpDefaultTo from 'lodash/fp/defaultTo'
 
+export const createObj = curry((key, val) => ({ [key]: val }))
+
 // Returns true if sent a value that is exactly false.
 export const isFalse = identical(false)
-
+export const isTrue = identical(true)
 // Find the first truthy argument value.
 export const firstValArg = flow(Array, find)
 
