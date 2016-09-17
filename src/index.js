@@ -1,30 +1,11 @@
 import {
-  cond, curry, defaultTo, find, flow, flowRight, get, identical, isEmpty, isObject,
-  negate, nthArg, over, partial, property, spread, stubTrue,
+  flow, flowRight, get, nthArg, over, partial, property, spread,
 } from 'lodash'
 import fpDefaultTo from 'lodash/fp/defaultTo'
-
-export const createObj = curry((key, val) => ({ [key]: val }))
-
-// Returns true if sent a value that is exactly false.
-export const isFalse = identical(false)
-export const isTrue = identical(true)
-// Find the first truthy argument value.
-export const firstValArg = flow(Array, find)
-
-// Turn empty objs and arrays to false. Turn other vals into a boolean.
-export const toBool = cond([ [ isObject, negate(isEmpty) ], [ stubTrue, Boolean ] ])
+import { toBool } from 'cape-lodash'
 
 // Select something and turn it into boolean. boolSelector(selector)(state)
 export const boolSelector = partial(flowRight, toBool)
-
-// Given two paths, select the first one that is defined.
-export function getDefault(path1, path2) {
-  return flow(
-    over([ property(path1), property(path2) ]),
-    spread(defaultTo)
-  )
-}
 
 // Returns the 2nd arg.
 export const getProps = nthArg(1)
