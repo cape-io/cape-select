@@ -4,6 +4,7 @@ A few `reselect` inspired helper utility/selector functions. Using functional pr
 
 Please view source for explanation and tests for usage.
 
+- `createObj(key, value)` - curried. creates a new object with one key/val.
 - `isFalse(false)` - Returns true if sent a value that is exactly false.
 - `isTrue(true)` - Returns true if sent a value that is exactly true.
 - `firstValArg(0, '', 'foo')` - Find the first truthy argument value.
