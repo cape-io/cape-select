@@ -1,5 +1,5 @@
 import {
-  curry, flow, flowRight, get, isFunction, nthArg, over, partial, property, spread,
+  flow, flowRight, get, isFunction, nthArg, over, partial, property, spread,
 } from 'lodash'
 import fpDefaultTo from 'lodash/fp/defaultTo'
 import { toBool } from 'cape-lodash'
@@ -16,10 +16,10 @@ export function getSelect(collectionSelector, idSelector) {
 }
 
 // Send arg to selector then get property at path. Apply defaultValue.
-export const select = curry((selector, path, defaultValue = null) => {
+export function select(selector, path, defaultValue = null) {
   if (!isFunction(selector)) throw new Error('Selector must be a function.')
   return flow(selector, property(path), fpDefaultTo(defaultValue))
-})
+}
 
 // See createSelector(). This has no memoization.
 export function simpleSelector(...funcs) {
