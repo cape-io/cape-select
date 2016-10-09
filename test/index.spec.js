@@ -1,8 +1,11 @@
 import test from 'tape'
 import { constant, property } from 'lodash'
 
-import { boolSelector, getProps, getSelect, select, simpleSelector } from '../src'
-import { change, collection, state, props, state2 } from './mock'
+import {
+  boolSelector, getAll, getObjIds, getProps, getSelect, select, simpleSelector,
+} from '../src'
+import { change, collection, state, props, state2, offices, world, officesFull } from './mock'
+import showrooms from './showrooms'
 
 const getSocket = property('socket')
 const getSessionId = select(getSocket, 'sessionId')
@@ -23,7 +26,14 @@ test('getSelect', (t) => {
   t.equal(getSelect(constant(collection), constant('a2'))(), collection.a2)
   t.end()
 })
-
+test('getAll', (t) => {
+  t.deepEqual(getAll(showrooms, offices.world), world)
+  t.end()
+})
+test('getObjIds', (t) => {
+  t.deepEqual(getObjIds(showrooms, offices), officesFull)
+  t.end()
+})
 test('select()', (t) => {
   const getUser = property('user')
   t.equal(getUser(state), state.user, 'getUser')

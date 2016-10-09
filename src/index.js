@@ -1,7 +1,9 @@
 import {
-  flow, flowRight, get, isFunction, nthArg, over, partial, property, spread,
+  at, curry, flow, flowRight, get, isFunction, mapValues,
+  nthArg, over, partial, property, spread, unary,
 } from 'lodash'
 import fpDefaultTo from 'lodash/fp/defaultTo'
+// import fpGet from 'lodash/fp/get'
 import { toBool } from 'cape-lodash'
 
 // Select something and turn it into boolean. boolSelector(selector)(state)
@@ -14,7 +16,10 @@ export const getProps = nthArg(1)
 export function getSelect(collectionSelector, idSelector) {
   return flow(over([ collectionSelector, idSelector ]), spread(get))
 }
-
+export const getAll = curry(at, 2)
+export function selectObjIds(collection, objIds) {
+  return mapValues(objIds, unary(getAll(collection)))
+}
 // Send arg to selector then get property at path. Apply defaultValue.
 export function select(selector, path, defaultValue = null) {
   if (!isFunction(selector)) throw new Error('Selector must be a function.')
