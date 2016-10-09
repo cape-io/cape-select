@@ -17,7 +17,7 @@ export function getSelect(collectionSelector, idSelector) {
   return flow(over([ collectionSelector, idSelector ]), spread(get))
 }
 export const getAll = curry(at, 2)
-export function selectObjIds(collection, objIds) {
+export function getObjIds(collection, objIds) {
   return mapValues(objIds, unary(getAll(collection)))
 }
 // Send arg to selector then get property at path. Apply defaultValue.
