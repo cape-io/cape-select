@@ -32,5 +32,6 @@ export function simpleSelector(...funcs) {
   return flow(over(funcs), spread(last))
 }
 export function structuredSelector(object) {
-  return (...args) => mapValues(object, selector => selector(...args))
+  return (...args) =>
+    mapValues(object, selector => (isFunction(selector) && selector(...args)) || selector)
 }

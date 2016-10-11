@@ -1,4 +1,4 @@
-# cape-select v2.2.0
+# cape-select v2.2.1
 
 A few `reselect` inspired helper utility/selector functions. Using functional programming as much as possible with the help of my good friend `lodash`.
 
@@ -11,4 +11,4 @@ Please view source for explanation and tests for usage.
 - `getObjIds(collection, objIds)`
 - `select(selector, path)` - Curried. Send arg to selector then get property at path. Apply defaultValue.
 - `simpleSelector(select1, select2, reducer)` - `createSelector()` without memoization.
-- `structuredSelector(object)` - like createStructuredSelector without memoization.
+- `structuredSelector(object)` - like createStructuredSelector without memoization. If value isn't a function it gets passed along untouched.

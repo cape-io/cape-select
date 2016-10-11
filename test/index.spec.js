@@ -55,8 +55,8 @@ test('simpleSelector', (t) => {
   simpleSelector(getSessionId, getPresenter, checkAnswer)(state2)
 })
 test('structuredSelector', (t) => {
-  const obj = { uid: property('user.id'), connect: property('socket.connect') }
+  const obj = { uid: property('user.id'), connect: property('socket.connect'), foo: 'bar' }
   const selected = structuredSelector(obj)(state)
-  t.deepEqual(selected, { uid: 'anon', connect: true })
+  t.deepEqual(selected, { uid: 'anon', connect: true, foo: 'bar' })
   t.end()
 })
