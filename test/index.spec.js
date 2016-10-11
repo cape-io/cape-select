@@ -2,7 +2,7 @@ import test from 'tape'
 import { constant, property } from 'lodash'
 
 import {
-  boolSelector, getAll, getObjIds, getProps, getSelect, select, simpleSelector,
+  boolSelector, getAll, getObjIds, getProps, getSelect, select, simpleSelector, structuredSelector,
 } from '../src'
 import { change, collection, state, props, state2, offices, world, officesFull } from './mock'
 import showrooms from './showrooms'
@@ -53,4 +53,10 @@ test('simpleSelector', (t) => {
     t.end(arg3)
   }
   simpleSelector(getSessionId, getPresenter, checkAnswer)(state2)
+})
+test('structuredSelector', (t) => {
+  const obj = { uid: property('user.id'), connect: property('socket.connect') }
+  const selected = structuredSelector(obj)(state)
+  t.deepEqual(selected, { uid: 'anon', connect: true })
+  t.end()
 })

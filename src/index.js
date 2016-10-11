@@ -31,3 +31,6 @@ export function simpleSelector(...funcs) {
   const last = funcs.pop()
   return flow(over(funcs), spread(last))
 }
+export function structuredSelector(object) {
+  return (...args) => mapValues(object, selector => selector(...args))
+}
