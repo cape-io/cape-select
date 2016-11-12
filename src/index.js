@@ -11,7 +11,9 @@ export const boolSelector = partial(flowRight, toBool)
 
 // Returns the 2nd arg.
 export const getProps = nthArg(1)
-
+export function selectProp(path) {
+  return partial(flow, getProps, property(path))
+}
 // Returns the collection property at key as determined by idSelector.
 export function getSelect(collectionSelector, idSelector) {
   return flow(over([ collectionSelector, idSelector ]), spread(get))
@@ -34,4 +36,8 @@ export function simpleSelector(...funcs) {
 export function structuredSelector(object) {
   return (...args) =>
     mapValues(object, selector => (isFunction(selector) && selector(...args)) || selector)
+}
+export function thunkSelect(selector, props) {
+  if (!isFunction(selector)) throw new Error('selector must be a function')
+  return (dispatch, getState) => selector(getState(), props)
 }

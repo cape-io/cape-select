@@ -1,8 +1,9 @@
 import test from 'tape'
-import { constant, property } from 'lodash'
+import { constant, flow, nthArg, property } from 'lodash'
 
 import {
-  boolSelector, getAll, getObjIds, getProps, getSelect, select, simpleSelector, structuredSelector,
+  boolSelector, getAll, getObjIds, getProps, getSelect,
+  select, simpleSelector, structuredSelector, thunkSelect,
 } from '../src'
 import { change, collection, state, props, state2, offices, world, officesFull } from './mock'
 import showrooms from './showrooms'
@@ -58,5 +59,12 @@ test('structuredSelector', (t) => {
   const obj = { uid: property('user.id'), connect: property('socket.connect'), foo: 'bar' }
   const selected = structuredSelector(obj)(state)
   t.deepEqual(selected, { uid: 'anon', connect: true, foo: 'bar' })
+  t.end()
+})
+test('thunkSelect', (t) => {
+  const getState = constant(state)
+  t.equal(thunkSelect(property('user.id'))(null, getState), 'anon')
+  const selector = flow(nthArg(1), property('id'))
+  t.equal(thunkSelect(selector, { id: 'foo', bar: 'cat' })(null, getState), 'foo')
   t.end()
 })
