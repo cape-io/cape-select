@@ -1,6 +1,6 @@
 {
   "name": "cape-select",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "A few reselect inspired helper utility/selector functions.",
   "main": "lib/index.js",
   "author": "Kai Curry <kai@cape.io> (http://www.cape.io/)",
@@ -15,8 +15,8 @@
   },
   "license": "ISC",
   "dependencies": {
-    "cape-lodash": "^1.0.0",
-    "lodash": "^4.15.0"
+    "cape-lodash": "^1.7.0",
+    "lodash": "^4.17.2"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
