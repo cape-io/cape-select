@@ -35,7 +35,7 @@ export function simpleSelector(...funcs) {
 }
 export function structuredSelector(object) {
   return (...args) =>
-    mapValues(object, selector => (isFunction(selector) && selector(...args)) || selector)
+    mapValues(object, selector => (isFunction(selector) ? selector(...args) : selector))
 }
 export function thunkSelect(selector, props) {
   if (!isFunction(selector)) throw new Error('selector must be a function')
