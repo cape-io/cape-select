@@ -2,7 +2,7 @@ import test from 'tape'
 import { constant, flow, nthArg, property } from 'lodash'
 
 import {
-  boolSelector, getAll, getObjIds, getProps, getSelect,
+  boolSelector, getAll, getObjIds, getProp, getProps, getSelect,
   select, simpleSelector, structuredSelector, thunkSelect,
 } from '../src'
 import { change, collection, state, props, state2, offices, world, officesFull } from './mock'
@@ -21,6 +21,12 @@ test('boolSelector', (t) => {
 
 test('getProps', (t) => {
   t.equal(getProps(state, props, 1), props, 'props')
+  t.end()
+})
+test('getProp', (t) => {
+  const getFriendId = getProp('friendId')
+  t.equal(typeof getFriendId, 'function')
+  t.equal(getFriendId(null, { friendId: 'Thom' }), 'Thom')
   t.end()
 })
 test('getSelect', (t) => {
@@ -42,7 +48,7 @@ test('select()', (t) => {
   t.equal(getName(state), 'foo', 'getName')
   const getGender = select(getUser, 'gender', 'uni')
   t.equal(getGender(state), 'bar', 'gender')
-  const stateNoGen = state.without([ 'user', 'gender' ])
+  const stateNoGen = state.without(['user', 'gender'])
   t.equal(getGender(stateNoGen), 'uni', 'getGender missing, use default.')
   t.end()
 })

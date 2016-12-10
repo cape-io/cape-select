@@ -11,9 +11,9 @@ export const boolSelector = partial(flowRight, toBool)
 
 // Returns the 2nd arg.
 export const getProps = nthArg(1)
-export function selectProp(path) {
-  return partial(flow, getProps, property(path))
-}
+export const selectProp = flow(property, partial(flow, getProps))
+export const getProp = selectProp
+
 // Returns the collection property at key as determined by idSelector.
 export function getSelect(collectionSelector, idSelector) {
   return flow(over([ collectionSelector, idSelector ]), spread(get))
