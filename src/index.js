@@ -16,7 +16,7 @@ export const getProp = selectProp
 
 // Returns the collection property at key as determined by idSelector.
 export function getSelect(collectionSelector, idSelector) {
-  return flow(over([ collectionSelector, idSelector ]), spread(get))
+  return flow(over([collectionSelector, idSelector]), spread(get))
 }
 export const getAll = curry(at, 2)
 export function getObjIds(collection, objIds) {
