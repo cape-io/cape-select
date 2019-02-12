@@ -1,5 +1,6 @@
 import test from 'tape'
-import { constant, flow, nthArg, property } from 'lodash'
+import { get } from 'lodash/fp'
+import { constant, flow, identity, nthArg, property } from 'lodash'
 
 import {
   boolSelector, getAll, getObjIds, getProp, getProps, getSelect,
@@ -13,9 +14,10 @@ const getSessionId = select(getSocket, 'sessionId')
 const getPresenter = select(getSocket, 'presenter')
 
 test('boolSelector', (t) => {
-  const bSel = boolSelector(getSessionId)
-  t.equal(bSel(state), false, 'null')
-  t.equal(bSel(state2), true, 'string')
+  const bSel = boolSelector(get('foo'))
+  t.equal(bSel({ foo: null }), false, 'null')
+  t.equal(bSel({ foo: 'hi' }), true, 'string')
+  t.equal(bSel({ foo: {} }), false, 'empty obj')
   t.end()
 })
 
@@ -30,17 +32,10 @@ test('getProp', (t) => {
   t.end()
 })
 test('getSelect', (t) => {
-  t.equal(getSelect(constant(collection), constant('a2'))(), collection.a2)
+  t.equal(getSelect(identity, constant('a2'))(collection), collection.a2)
   t.end()
 })
-test('getAll', (t) => {
-  t.deepEqual(getAll(showrooms, offices.world), world)
-  t.end()
-})
-test('getObjIds', (t) => {
-  t.deepEqual(getObjIds(showrooms, offices), officesFull)
-  t.end()
-})
+
 test('select()', (t) => {
   const getUser = property('user')
   t.equal(getUser(state), state.user, 'getUser')

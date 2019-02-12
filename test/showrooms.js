@@ -1,4 +1,5 @@
 import { keyBy } from 'lodash'
+
 export const offices = [
   {
     id: 'rgheadquarters',

@@ -1,31 +1,27 @@
 import {
-  at, curry, flow, flowRight, get, isFunction, mapValues,
-  nthArg, over, partial, property, spread, unary,
-} from 'lodash'
-import fpDefaultTo from 'lodash/fp/defaultTo'
-// import fpGet from 'lodash/fp/get'
-import { toBool } from 'cape-lodash'
+  defaultTo, flow, get, isFunction, mapValues,
+  negate, nthArg, over, property, spread,
+} from 'lodash/fp'
+
+import { isWorthless } from 'understory'
 
 // Select something and turn it into boolean. boolSelector(selector)(state)
-export const boolSelector = partial(flowRight, toBool)
+export const boolSelector = selector => flow(selector, negate(isWorthless))
 
 // Returns the 2nd arg.
 export const getProps = nthArg(1)
-export const selectProp = flow(property, partial(flow, getProps))
+export const selectProp = path => flow(getProps, get(path))
 export const getProp = selectProp
 
 // Returns the collection property at key as determined by idSelector.
 export function getSelect(collectionSelector, idSelector) {
-  return flow(over([collectionSelector, idSelector]), spread(get))
+  return flow(over([idSelector, collectionSelector]), spread(get))
 }
-export const getAll = curry(at, 2)
-export function getObjIds(collection, objIds) {
-  return mapValues(objIds, unary(getAll(collection)))
-}
+
 // Send arg to selector then get property at path. Apply defaultValue.
 export function select(selector, path, defaultValue = null) {
   if (!isFunction(selector)) throw new Error('Selector must be a function.')
-  return flow(selector, property(path), fpDefaultTo(defaultValue))
+  return flow(selector, property(path), defaultTo(defaultValue))
 }
 
 // See createSelector(). This has no memoization.
@@ -33,9 +29,9 @@ export function simpleSelector(...funcs) {
   const last = funcs.pop()
   return flow(over(funcs), spread(last))
 }
-export function structuredSelector(object) {
+export function structuredSelector(objectSelector) {
   return (...args) =>
-    mapValues(object, selector => (isFunction(selector) ? selector(...args) : selector))
+    mapValues(selector => (isFunction(selector) ? selector(...args) : selector), objectSelector)
 }
 export function thunkSelect(selector, props) {
   if (!isFunction(selector)) throw new Error('selector must be a function')
