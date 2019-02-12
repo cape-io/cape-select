@@ -10,5 +10,4 @@ Please view source for explanation and tests for usage.
 - `getSelect(getCollection, idSelector)` - Returns the collection property at key as determined by idSelector.
 - `select(selector, path, defaultValue = null)` - Send arg to selector then get property at path. Apply defaultValue.
 - `simpleSelector(select1, select2, reducer)` - `createSelector()` without memoization.
-- `structuredSelector(object)` - like createStructuredSelector without memoization. If value isn't a function it gets passed along untouched.
 - `thunkSelect(selector, props)` - Send getState() and props to selector from thunk arg signature.

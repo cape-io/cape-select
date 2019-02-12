@@ -29,10 +29,7 @@ export function simpleSelector(...funcs) {
   const last = funcs.pop()
   return flow(over(funcs), spread(last))
 }
-export function structuredSelector(objectSelector) {
-  return (...args) =>
-    mapValues(selector => (isFunction(selector) ? selector(...args) : selector), objectSelector)
-}
+
 export function thunkSelect(selector, props) {
   if (!isFunction(selector)) throw new Error('selector must be a function')
   return (dispatch, getState) => selector(getState(), props)
