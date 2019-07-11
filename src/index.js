@@ -1,5 +1,5 @@
 import {
-  defaultTo, flow, get, isFunction, mapValues,
+  defaultTo, flow, get, isFunction,
   negate, nthArg, over, property, spread,
 } from 'lodash/fp'
 

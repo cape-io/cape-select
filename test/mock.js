@@ -1,4 +1,4 @@
-import immutable from 'seamless-immutable'
+const { set } = require('lodash/fp')
 
 export const socket = {
   connected: false,
@@ -54,49 +54,61 @@ export const collection = {
     },
   },
 }
-export const state = immutable({
+export const state = {
   collection,
   user,
   socket,
-})
-export const change = { presenter: 'kai', sessionId: 'abc123' }
-export const state2 = state.set('socket', state.socket.merge(change))
+}
+export const change = { ...socket, presenter: 'kai', sessionId: 'abc123' }
+export const state2 = set('socket', change, state)
 export const offices = {
-  main: [ 'dlheadquarters' ],
+  main: ['dlheadquarters'],
   us: [
     'ariz',
     'bostonNE',
     'chicago',
     'southeast',
   ],
-  world: [ 'pacificrim', 'europe', 'canada' ],
+  world: ['pacificrim', 'europe', 'canada'],
 }
 export const world = [
-  { id: 'pacificrim',
+  {
+    id: 'pacificrim',
     title: 'Australia, New Zealand, Singapore Representative',
-    type: 'Showroom' },
+    type: 'Showroom',
+  },
   { id: 'europe', title: 'European Representative', type: 'Showroom' },
   { id: 'canada', title: 'Toronto Showroom', type: 'Showroom' },
 ]
 export const officesFull = {
-  main: [ { id: 'dlheadquarters',
-       title: 'Corporate Headquarters',
-       type: 'Showroom' } ],
-  us: [ { id: 'ariz', title: 'Arizona Showroom', type: 'Showroom' },
-     { id: 'bostonNE',
-       title: 'Boston and Northeast US',
-       type: 'Showroom' },
-     { id: 'chicago', title: 'Chicago Showroom', type: 'Showroom' },
-     { id: 'southeast',
-       title: 'Southeastern US, Ohio, Kentucky, Indiana Representative',
-       type: 'Showroom' } ],
+  main: [{
+    id: 'dlheadquarters',
+    title: 'Corporate Headquarters',
+    type: 'Showroom',
+  }],
+  us: [{ id: 'ariz', title: 'Arizona Showroom', type: 'Showroom' },
+    {
+      id: 'bostonNE',
+      title: 'Boston and Northeast US',
+      type: 'Showroom',
+    },
+    { id: 'chicago', title: 'Chicago Showroom', type: 'Showroom' },
+    {
+      id: 'southeast',
+      title: 'Southeastern US, Ohio, Kentucky, Indiana Representative',
+      type: 'Showroom',
+    }],
   world: [
-    { id: 'pacificrim',
-       title: 'Australia, New Zealand, Singapore Representative',
-       type: 'Showroom' },
-     { id: 'europe',
-       title: 'European Representative',
-       type: 'Showroom' },
-     { id: 'canada', title: 'Toronto Showroom', type: 'Showroom' },
+    {
+      id: 'pacificrim',
+      title: 'Australia, New Zealand, Singapore Representative',
+      type: 'Showroom',
+    },
+    {
+      id: 'europe',
+      title: 'European Representative',
+      type: 'Showroom',
+    },
+    { id: 'canada', title: 'Toronto Showroom', type: 'Showroom' },
   ],
 }
