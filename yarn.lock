@@ -3382,12 +3382,12 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
-understory@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/understory/-/understory-1.7.0.tgz#a8ccbab909e082de479a44153c5e6aff6e20c280"
-  integrity sha512-8StoaiRj8zyc6q59Ja94uaF0TprDUrsMOXwO6701HESPSmPfRJVu0EFb14xkCGwX8qptyCTTXqpBCl53QYT6Xw==
+understory@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/understory/-/understory-1.7.1.tgz#90ef7779bd165612974bdfde581e38c99872c938"
+  integrity sha512-GWOI3d40Y/7aos+m0JbcSsDdKk5auZX/w5+S/cTxfON9m+rLw+0pjjqlI9y1aUD8Z5OJNxIiEvTB5FbqEMv3cg==
   dependencies:
-    lodash "^4.17.11"
+    lodash "^4.17.14"
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
